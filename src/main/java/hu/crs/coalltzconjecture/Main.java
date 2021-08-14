@@ -1,26 +1,33 @@
 package hu.crs.coalltzconjecture;
 
-import hu.crs.coalltzconjecture.math.Sequence;
 import hu.crs.coalltzconjecture.math.SequenceGenerator;
-import org.knowm.xchart.QuickChart;
 import org.knowm.xchart.SwingWrapper;
-import org.knowm.xchart.internal.chartpart.Chart;
+import org.knowm.xchart.XYChart;
+import org.knowm.xchart.XYChartBuilder;
+import org.knowm.xchart.XYSeries;
+import org.knowm.xchart.style.Styler;
+
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class Main {
     public static void main(String[] args) {
 
+        // Create Chart
+        XYChart chart = new XYChartBuilder().width(600).height(500).title("Gaussian Blobs").xAxisTitle("X").yAxisTitle("Y").build();
+
+// Customize Chart
+        chart.getStyler().setDefaultSeriesRenderStyle(XYSeries.XYSeriesRenderStyle.Line);
+        chart.getStyler().setChartTitleVisible(false);
+        chart.getStyler().setLegendPosition(Styler.LegendPosition.InsideSW);
+        chart.getStyler().setMarkerSize(16);
+
         var sequenceGenerator = new SequenceGenerator();
-        var sequence1 = sequenceGenerator.generate(1);
-        var sequence2 = sequenceGenerator.generate(2);
+        sequenceGenerator.sequences(IntStream.range(1, 20).boxed().collect(Collectors.toList()))
+                .forEach(s -> {
+                    chart.addSeries(String.format("Series: %d", s.ys().get(0)), s.xs(), s.ys());
+                });
 
-
-
-        // Show it
-        new SwingWrapper(chart(sequenceGenerator.generate(3))).displayChart();
+        new SwingWrapper(chart).displayChart();
     }
-
-    private static Chart chart(Sequence sequence) {
-        return QuickChart.getChart("Sample Chart", "X", "Y", "y(x)", sequence.xs(), sequence.ys());
-    }
-
 }
