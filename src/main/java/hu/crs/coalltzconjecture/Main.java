@@ -22,6 +22,7 @@ public class Main {
         chart.getStyler().setChartTitleVisible(false);
         chart.getStyler().setLegendPosition(Styler.LegendPosition.InsideSW);
         chart.getStyler().setMarkerSize(16);
+        chart.getStyler().setCursorEnabled(true);
 
         var sequenceGenerator = new SequenceGenerator();
         sequenceGenerator.sequences(IntStream.range(1, 20).boxed().collect(Collectors.toList()))
