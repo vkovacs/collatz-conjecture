@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 
 public class SequenceGenerator {
 
-    public Sequence generate(int seed) {
+    public Sequence sequence(int seed) {
         List<Integer> xs = new ArrayList<>();
         List<Integer> ys = new ArrayList<>();
 
@@ -40,7 +40,7 @@ public class SequenceGenerator {
 
     public List<Sequence> sequences(List<Integer> integers) {
         return integers.stream()
-                .map(this::generate)
+                .map(this::sequence)
                 .collect(Collectors.toList());
     }
 }
