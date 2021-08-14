@@ -15,7 +15,8 @@ public class Main {
     public static void main(String[] args) {
 
         // Create Chart
-        XYChart chart = new XYChartBuilder().width(1920).height(1080).title("Gaussian Blobs").xAxisTitle("X").yAxisTitle("Y").build();
+
+        XYChart chart = new XYChartBuilder().width(1024).height(768).title("3n+1 series").xAxisTitle("X").yAxisTitle("Y").build();
 
         // Customize Chart
         chart.getStyler().setDefaultSeriesRenderStyle(XYSeries.XYSeriesRenderStyle.Line);
